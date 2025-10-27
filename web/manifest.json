@@ -1,0 +1,11 @@
+{
+    "name": "Wind Energy Training Institute",
+    "short_name": "WETI",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#0D47A1",
+    "theme_color": "#0D47A1",
+    "description": "Wind Energy Training Institute - Leading offshore wind energy training programs",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false
+}
