@@ -53,7 +53,7 @@ If you prefer to build locally and deploy:
 flutter pub get
 
 # Build for production
-flutter build web --release --web-renderer canvaskit
+flutter build web --release --web-renderer html --base-href /
 ```
 
 ### 2. Deploy to Cloudflare Pages
@@ -114,21 +114,43 @@ Every push to a branch creates a preview deployment at:
 
 ## Troubleshooting
 
+### Empty/Blank Page After Deployment
+
+If you see a blank page after deployment:
+
+1. **Check base href**: Ensure `web/index.html` has `<base href="/">`
+2. **Verify build command**: Should include `--base-href /`
+3. **Check browser console**: Press F12 and look for errors
+4. **Try different renderer**: Switch between `html` and `canvaskit`
+
+📘 **[View Complete Troubleshooting Guide](TROUBLESHOOTING.md)** for detailed solutions
+
 ### Build Fails
 - Check Flutter version compatibility
 - Ensure all dependencies are specified in `pubspec.yaml`
 - Review build logs in Cloudflare Pages dashboard
+- Make sure `cloudflare-build.sh` is executable: `chmod +x cloudflare-build.sh`
 
 ### Assets Not Loading
-- Verify `<base href>` in `web/index.html`
+- Verify `<base href="/">` in `web/index.html` (must end with `/`)
 - Check asset paths are relative
 - Ensure assets are declared in `pubspec.yaml`
 
 ### Performance Optimization
-The build uses `canvaskit` renderer for best performance. You can switch to `html` renderer for smaller bundle size:
+
+**Web Renderer Options:**
+
+The build script uses `html` renderer for better compatibility and smaller bundle size:
 
 ```bash
-flutter build web --release --web-renderer html
+# HTML renderer (recommended for most cases)
+flutter build web --release --web-renderer html --base-href /
+
+# CanvasKit renderer (better graphics, larger bundle)
+flutter build web --release --web-renderer canvaskit --base-href /
+
+# Auto (Flutter decides)
+flutter build web --release --web-renderer auto --base-href /
 ```
 
 ## Build Time Optimization

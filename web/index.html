@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value in
+    the FLUTTER_BASE_HREF environment variable when the build is run.
+  -->
   <base href="/">
 
   <meta charset="UTF-8">
@@ -18,20 +31,76 @@
     body {
       margin: 0;
       padding: 0;
+      background: linear-gradient(135deg, #0D47A1 0%, #1976D2 50%, #4CAF50 100%);
+    }
+
+    #loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      width: 100vw;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: linear-gradient(135deg, #0D47A1 0%, #1976D2 50%, #4CAF50 100%);
+      z-index: 9999;
+    }
+
+    .loader {
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid #fff;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    #loading-text {
+      color: white;
+      margin-top: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 18px;
     }
   </style>
 </head>
 <body>
+  <div id="loading">
+    <div class="loader"></div>
+    <div id="loading-text">Loading Wind Energy Training Institute...</div>
+  </div>
+
+  <script>
+    // Show any loading errors
+    window.addEventListener('error', function(e) {
+      console.error('Loading error:', e);
+      document.getElementById('loading-text').textContent = 'Loading failed. Please refresh the page.';
+    });
+  </script>
+
   <script src="flutter.js" defer></script>
   <script>
     window.addEventListener('load', function(ev) {
+      // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
         },
         onEntrypointLoaded: function(engineInitializer) {
           engineInitializer.initializeEngine().then(function(appRunner) {
-            appRunner.runApp();
+            appRunner.runApp().then(function() {
+              // Remove loading indicator once app is running
+              var loading = document.getElementById('loading');
+              if (loading) {
+                loading.style.display = 'none';
+              }
+            });
           });
         }
       });

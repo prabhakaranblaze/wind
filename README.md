@@ -78,6 +78,7 @@ This project is configured for automatic deployment to Cloudflare Pages.
 **Quick Setup:**
 - **Build command**: `./cloudflare-build.sh`
 - **Build output directory**: `build/web`
+- **Root directory**: `/`
 
 📘 **[View Complete Cloudflare Deployment Guide](CLOUDFLARE_DEPLOYMENT.md)**
 
@@ -85,7 +86,24 @@ The deployment guide includes:
 - Automatic deployment setup
 - Manual deployment options
 - Custom domain configuration
-- Troubleshooting tips
+- Build optimization tips
+
+### Local Testing
+
+Before deploying, test locally:
+
+```bash
+# Build the app
+flutter build web --release --base-href /
+
+# Serve locally (using Python)
+cd build/web
+python3 -m http.server 8000
+
+# Visit http://localhost:8000
+```
+
+🔧 **Having issues?** Check the **[Troubleshooting Guide](TROUBLESHOOTING.md)** for solutions to common problems like empty pages.
 
 ## Course Information
 
