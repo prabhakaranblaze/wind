@@ -77,10 +77,20 @@
   </div>
 
   <script>
+    // Define serviceWorkerVersion if not already defined
+    if (typeof serviceWorkerVersion === 'undefined') {
+      var serviceWorkerVersion = null;
+    }
+  </script>
+
+  <script>
     // Show any loading errors
     window.addEventListener('error', function(e) {
       console.error('Loading error:', e);
-      document.getElementById('loading-text').textContent = 'Loading failed. Please refresh the page.';
+      var loadingText = document.getElementById('loading-text');
+      if (loadingText) {
+        loadingText.textContent = 'Loading failed. Please refresh the page.';
+      }
     });
   </script>
 

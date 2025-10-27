@@ -10,6 +10,11 @@ Open your browser's Developer Tools (F12) and check the Console tab for errors:
 
 **Common errors and fixes:**
 
+- **`serviceWorkerVersion is not defined`**
+  - **Cause**: Service worker variable not initialized before use
+  - **Fix**: This is now fixed in `web/index.html` - the variable is defined with a fallback value
+  - **Note**: If you still see this, ensure you're using the latest version of `web/index.html`
+
 - **404 errors for `main.dart.js` or `flutter.js`**
   - **Cause**: Incorrect base href
   - **Fix**: Ensure `base href="/"` in `web/index.html`
