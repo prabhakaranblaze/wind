@@ -66,8 +66,26 @@ web/
 
 4. Build for production:
    ```bash
-   flutter build web
+   flutter build web --release
    ```
+
+## Deployment
+
+### Cloudflare Pages (Recommended)
+
+This project is configured for automatic deployment to Cloudflare Pages.
+
+**Quick Setup:**
+- **Build command**: `./cloudflare-build.sh`
+- **Build output directory**: `build/web`
+
+📘 **[View Complete Cloudflare Deployment Guide](CLOUDFLARE_DEPLOYMENT.md)**
+
+The deployment guide includes:
+- Automatic deployment setup
+- Manual deployment options
+- Custom domain configuration
+- Troubleshooting tips
 
 ## Course Information
 
